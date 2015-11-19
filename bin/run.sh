@@ -4,6 +4,10 @@ set -e
 
 [ "$DEBUG" == "1" ] && set -x && set +e
 
+if [ "${GLUSTER_HOST}" == "storage" -o -z "${GLUSTER_HOST}" ]; then
+   GLUSTER_HOST=${GLUSTER_HOST}
+fi
+
 # Required variables
 sleep 5
 export GLUSTER_HOSTS=`dig +short ${GLUSTER_HOST}`
