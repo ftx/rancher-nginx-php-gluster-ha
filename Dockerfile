@@ -1,6 +1,6 @@
 FROM ubuntu:14.04
 
-MAINTAINER Manel Martinez <manel@nixelsolutions.com>
+MAINTAINER Florian Mauduit <flotix@linux.com>
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -8,10 +8,10 @@ RUN apt-get update && \
     apt-get install -y python-software-properties software-properties-common
 RUN add-apt-repository -y ppa:gluster/glusterfs-3.5 && \
     apt-get update && \
-    apt-get install -y nginx php5-fpm php5-mysql php-apc supervisor glusterfs-client curl haproxy pwgen unzip mysql-client dnsutils
+    apt-get install -y nginx php5-fpm php5-mysql php5-gd php5-redis php5-memcached php-apc supervisor glusterfs-client curl haproxy pwgen unzip mysql-client dnsutils
 
-ENV WORDPRESS_VERSION 4.2.2
-ENV WORDPRESS_NAME wordpress
+ENV SITE_NAME **ChangeMe**
+ENV DOMAIN **ChangeMe**
 ENV GLUSTER_VOL ranchervol
 ENV GLUSTER_VOL_PATH /var/www
 ENV HTTP_PORT 80
@@ -19,9 +19,6 @@ ENV HTTP_DOCUMENTROOT **ChangeMe**
 ENV PHP_SESSION_PATH ${GLUSTER_VOL_PATH}/phpsessions
 ENV DEBUG 0
 
-ENV DB_USER root
-ENV DB_PASSWORD **ChangeMe**
-ENV WP_DB_NAME **ChangeMe**
 ENV DB_HOST db
 ENV GLUSTER_HOST storage
 
@@ -33,7 +30,7 @@ ADD ./bin /usr/local/bin
 RUN chmod +x /usr/local/bin/*.sh
 ADD ./etc/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 ADD ./etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg
-ADD ./etc/nginx/sites-enabled/wordpress /etc/nginx/sites-enabled/wordpress
+ADD ./etc/nginx/sites-enabled/website /etc/nginx/sites-enabled/website
 
 # nginx config
 RUN sed -i -e"s/keepalive_timeout\s*65/keepalive_timeout 2/" /etc/nginx/nginx.conf

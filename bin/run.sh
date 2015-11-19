@@ -23,27 +23,25 @@ if [ -z "${DB_HOSTS}" ]; then
    exit 1
 fi
 
-if [ "${DB_PASSWORD}" == "**ChangeMe**" -o -z "${DB_PASSWORD}" ]; then
-   DB_PASSWORD=${DB_ENV_PXC_ROOT_PASSWORD}
-   if [ "${DB_PASSWORD}" == "**ChangeMe**" -o -z "${DB_PASSWORD}" ]; then
-      echo "ERROR: Could not retreive PXC_ROOT_PASSWORD from PXC service - DB_ENV_PXC_ROOT_PASSWORD env var is empty - Exiting..."
-      exit 0
-   fi
+if [ "${SITE_NAME}" == "**ChangeMe**" -o -z "${SITE_NAME}" ]; then
+   SITE_NAME=${SITE_NAME}
 fi
 
-if [ "${WP_DB_NAME}" == "**ChangeMe**" -o -z "${WP_DB_NAME}" ]; then
-   WP_DB_NAME=`echo "${WORDPRESS_NAME}" | sed "s/\./_/g"`
+
+if [ "${DOMAIN}" == "**ChangeMe**" -o -z "${DOMAIN}" ]; then
+   DOMAIN=${DOMAIN}
 fi
+
 
 if [ "${HTTP_DOCUMENTROOT}" == "**ChangeMe**" -o -z "${HTTP_DOCUMENTROOT}" ]; then
-   HTTP_DOCUMENTROOT=${GLUSTER_VOL_PATH}/${WORDPRESS_NAME}
+   HTTP_DOCUMENTROOT=${GLUSTER_VOL_PATH}/${SITE_NAME}
 fi
 
 ### Prepare configuration
 # nginx config
-perl -p -i -e "s/HTTP_PORT/${HTTP_PORT}/g" /etc/nginx/sites-enabled/wordpress
+perl -p -i -e "s/HTTP_PORT/${HTTP_PORT}/g" /etc/nginx/sites-enabled/website
 HTTP_ESCAPED_DOCROOT=`echo ${HTTP_DOCUMENTROOT} | sed "s/\//\\\\\\\\\//g"`
-perl -p -i -e "s/HTTP_DOCUMENTROOT/${HTTP_ESCAPED_DOCROOT}/g" /etc/nginx/sites-enabled/wordpress
+perl -p -i -e "s/HTTP_DOCUMENTROOT/${HTTP_ESCAPED_DOCROOT}/g" /etc/nginx/sites-enabled/website
 
 # php-fpm config
 PHP_ESCAPED_SESSION_PATH=`echo ${PHP_SESSION_PATH} | sed "s/\//\\\\\\\\\//g"`

@@ -1,1 +1,1 @@
-# rancher-wordpress-ha
+# rancher-nginx-php-gluster-ha

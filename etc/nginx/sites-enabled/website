@@ -4,7 +4,7 @@ server {
 	root HTTP_DOCUMENTROOT;
 	index index.php index.html index.htm;
 
-	server_name localhost;
+	server_name DOMAIN;
 	
 	sendfile off;
 
