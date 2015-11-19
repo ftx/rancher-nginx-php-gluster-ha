@@ -24,6 +24,7 @@ fi
 ### Prepare configuration
 # nginx config
 perl -p -i -e "s/HTTP_PORT/${HTTP_PORT}/g" /etc/nginx/sites-enabled/website
+perl -p -i -e "s/DOMAIN/${DOMAIN}/g" /etc/nginx/sites-enabled/website
 HTTP_ESCAPED_DOCROOT=`echo ${HTTP_DOCUMENTROOT} | sed "s/\//\\\\\\\\\//g"`
 perl -p -i -e "s/HTTP_DOCUMENTROOT/${HTTP_ESCAPED_DOCROOT}/g" /etc/nginx/sites-enabled/website
 
