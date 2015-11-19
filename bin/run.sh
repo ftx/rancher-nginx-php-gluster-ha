@@ -18,7 +18,7 @@ if [ "${DOMAIN}" == "**ChangeMe**" -o -z "${DOMAIN}" ]; then
 fi
 
 if [ "${HTTP_DOCUMENTROOT}" == "**ChangeMe**" -o -z "${HTTP_DOCUMENTROOT}" ]; then
-   HTTP_DOCUMENTROOT=${GLUSTER_VOL_PATH}/${WORDPRESS_NAME}
+   HTTP_DOCUMENTROOT=${GLUSTER_VOL_PATH}/${SITE_NAME}
 fi
 
 ### Prepare configuration
