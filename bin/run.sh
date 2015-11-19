@@ -4,27 +4,8 @@ set -e
 
 [ "$DEBUG" == "1" ] && set -x && set +e
 
-if [ "${GLUSTER_HOST}" == "storage" -o -z "${GLUSTER_HOST}" ]; then
-   GLUSTER_HOST=${GLUSTER_HOST}
-fi
-
-# Required variables
-sleep 5
-export GLUSTER_HOSTS=`dig +short ${GLUSTER_HOST}`
-if [ -z "${GLUSTER_HOSTS}" ]; then
-   echo "*** ERROR: Could not determine which containers are part of Gluster service."
-   echo "*** Is Gluster service linked with the alias \"${GLUSTER_HOST}\"?"
-   echo "*** If not, please link gluster service as \"${GLUSTER_HOST}\""
-   echo "*** Exiting ..."
-   exit 1
-fi
-export DB_HOSTS=`dig +short ${DB_HOST}`
-if [ -z "${DB_HOSTS}" ]; then
-   echo "*** ERROR: Could not determine which containers are part of PXC service."
-   echo "*** Is PXC service linked with the alias \"${DB_HOST}\"?"
-   echo "*** If not, please link gluster service as \"${DB_HOST}\""
-   echo "*** Exiting ..."
-   exit 1
+if [ "${GLUSTER_PEER}" == "storage" -o -z "${GLUSTER_PEER}" ]; then
+   GLUSTER_HOST=${GLUSTER_PEER}
 fi
 
 if [ "${SITE_NAME}" == "**ChangeMe**" -o -z "${SITE_NAME}" ]; then
@@ -63,8 +44,8 @@ perl -p -i -e "s/HTTP_DOCUMENTROOT/${HTTP_ESCAPED_DOCROOT}/g" /etc/nginx/sites-e
 PHP_ESCAPED_SESSION_PATH=`echo ${PHP_SESSION_PATH} | sed "s/\//\\\\\\\\\//g"`
 perl -p -i -e "s/;?session.save_path\s*=.*/session.save_path = \"${PHP_ESCAPED_SESSION_PATH}\"/g" /etc/php5/fpm/php.ini
 
-ALIVE=0
-for glusterHost in ${GLUSTER_HOSTS}; do
+vALIVE=0
+for glusterHost in ${GLUSTER_PEER}; do
     echo "=> Checking if I can reach GlusterFS node ${glusterHost} ..."
     if ping -c 10 ${glusterHost} >/dev/null 2>&1; then
        echo "=> GlusterFS node ${glusterHost} is alive"
