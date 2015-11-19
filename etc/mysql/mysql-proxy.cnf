@@ -1,0 +1,11 @@
+[mysql-proxy]
+
+proxy-address=127.0.0.1:3306
+daemon=0
+pid-file=/var/run/mysql-proxy.pid
+log-file=/var/log/mysql-proxy.log
+log-level=info
+proxy-backend-addresses=DB_HOSTS
+admin-username=DB_USER
+admin-password=DB_PASSWORD
+admin-lua-script=/usr/lib/mysql-proxy/lua/admin.lua
