@@ -4,6 +4,7 @@ MAINTAINER Florian Mauduit <flotix@linux.com>
 
 ENV DEBIAN_FRONTEND=noninteractive
 
+
 ENV SITE_NAME **ChangeMe**
 ENV DOMAIN **ChangeMe**
 
