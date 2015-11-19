@@ -36,7 +36,7 @@ ADD ./bin /usr/local/bin
 RUN chmod +x /usr/local/bin/*.sh
 ADD ./etc/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 ADD ./etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg
-ADD ./etc/nginx/sites-enabled/wordpress /etc/nginx/sites-enabled/wordpress
+ADD ./etc/nginx/sites-enabled/website /etc/nginx/sites-enabled/website
 
 # nginx config
 RUN sed -i -e"s/keepalive_timeout\s*65/keepalive_timeout 2/" /etc/nginx/nginx.conf
