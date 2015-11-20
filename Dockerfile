@@ -4,7 +4,6 @@ MAINTAINER Florian Mauduit <flotix@linux.com>
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-
 ENV SITE_NAME **ChangeMe**
 ENV DOMAIN **ChangeMe**
 
@@ -16,7 +15,7 @@ RUN add-apt-repository -y ppa:gluster/glusterfs-3.5 && \
 
 ENV WORDPRESS_VERSION 4.2.2
 ENV WORDPRESS_NAME website
-ENV GLUSTER_VOL **ChangeMe**
+ENV GLUSTER_VOL ranchervol
 ENV GLUSTER_VOL_PATH /var/www
 ENV HTTP_PORT 80
 ENV HTTP_DOCUMENTROOT **ChangeMe**
