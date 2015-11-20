@@ -12,6 +12,9 @@ if [ "${SITE_NAME}" == "**ChangeMe**" -o -z "${SITE_NAME}" ]; then
    SITE_NAME=${SITE_NAME}
 fi
 
+if [ "${GLUSTER_VOL}" == "**ChangeMe**" -o -z "${GLUSTER_VOL}" ]; then
+   GLUSTER_VOL=${GLUSTER_VOL}
+fi
 
 if [ "${DOMAIN}" == "**ChangeMe**" -o -z "${DOMAIN}" ]; then
    DOMAIN=${DOMAIN}
