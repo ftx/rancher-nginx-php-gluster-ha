@@ -8,6 +8,10 @@ if [ "${GLUSTER_PEER}" == "storage" -o -z "${GLUSTER_PEER}" ]; then
    GLUSTER_HOST=${GLUSTER_PEER}
 fi
 
+if [ "${GLUSTER_VOL}" == "ranchervol" -o -z "${GLUSTER_VOL}" ]; then
+   GLUSTER_VOL=${GLUSTER_VOL}
+fi
+
 if [ "${SITE_NAME}" == "**ChangeMe**" -o -z "${SITE_NAME}" ]; then
    SITE_NAME=${SITE_NAME}
 fi
