@@ -4,29 +4,60 @@ MAINTAINER Florian Mauduit <flotix@linux.com>
 
 ENV DEBIAN_FRONTEND=noninteractive
 
+######## ENV VARIABLES ########
+
+# DEBUG
+ENV DEBUG 0
+
+# GLOBAL
 ENV SITE_NAME **ChangeMe**
 ENV DOMAIN **ChangeMe**
 
-RUN apt-get update && \
-    apt-get install -y python-software-properties software-properties-common
-RUN add-apt-repository -y ppa:gluster/glusterfs-3.5 && \
-    apt-get update && \
-    apt-get install -y nginx php5-fpm php5-mysql php-apc supervisor glusterfs-client curl haproxy pwgen unzip mysql-client dnsutils
-
-ENV WORDPRESS_VERSION 4.2.2
-ENV WORDPRESS_NAME website
+# Config GlusterFSClient
+ENV GLUSTER **NO**
 ENV GLUSTER_VOL ranchervol
 ENV GLUSTER_VOL_PATH /var/www
+ENV GLUSTER_PEER storage
+
+# Git NGINX
+ENV GIT_NGINX_REPO **NO**
+ENV GIT_NGINX_LOGIN **NO**
+ENV GIT_NGINX_PASS **NO**
+ENV GIT_NGINX_BRANCH master
+
+# Git WEB
+ENV GIT_WEB_REPO **NO**
+ENV GIT_WEB_LOGIN **NO**
+ENV GIT_WEB_PASS **NO**
+ENV GIT_WEB_BRANCH master
+
+# Config PHP
+ENV PHP_MAX_UPLOAD_FILESIZE 20M
+ENV PHP_MAX_POST_SIZE 20M
+ENV PHP_SESSION_PATH ${GLUSTER_VOL_PATH}/phpsessions
+
+# Config NGINX
 ENV HTTP_PORT 80
 ENV HTTP_DOCUMENTROOT **ChangeMe**
-ENV PHP_SESSION_PATH ${GLUSTER_VOL_PATH}/phpsessions
-ENV DEBUG 0
+ENV NGINX_WORKER_PROCESSES 2
+ENV NGINX_WORKER_CONNECTIONS 2048
+ENV NGINX_MULTI_ACCEPT on
+ENV NGINX_SET_REAL_IP 0.0.0.0
 
-ENV DB_USER root
+# Config SQL
+ENV DB_CLUSTER **NO** 
+ENV DB_USER **ChangeMe**
 ENV DB_PASSWORD **ChangeMe**
-ENV WP_DB_NAME **ChangeMe**
-ENV DB_HOST db
-ENV GLUSTER_HOST storage
+
+################################
+
+
+RUN apt-get update && \
+    apt-get install -y python-software-properties software-properties-common
+RUN add-apt-repository -y ppa:gluster/glusterfs-3.7 && \
+    apt-get update && \
+    apt-get install -y nginx php5-fpm php5-mysql php-apc supervisor glusterfs-client curl haproxy pwgen unzip mysql-client dnsutils git
+
 
 RUN mkdir -p /var/log/supervisor ${GLUSTER_VOL_PATH}
 WORKDIR ${GLUSTER_VOL_PATH}
@@ -38,19 +69,5 @@ ADD ./etc/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 ADD ./etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg
 ADD ./etc/nginx/sites-enabled/website /etc/nginx/sites-enabled/website
 
-# nginx config
-RUN sed -i -e"s/keepalive_timeout\s*65/keepalive_timeout 2/" /etc/nginx/nginx.conf
-RUN sed -i -e"s/keepalive_timeout 2/keepalive_timeout 2;\n\tclient_max_body_size 100m/" /etc/nginx/nginx.conf
-RUN echo "daemon off;" >> /etc/nginx/nginx.conf
-RUN rm -f /etc/nginx/sites-enabled/default
-
-# php-fpm config
-RUN sed -i -e "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/g" /etc/php5/fpm/php.ini
-RUN sed -i -e "s/upload_max_filesize\s*=\s*2M/upload_max_filesize = 100M/g" /etc/php5/fpm/php.ini
-RUN sed -i -e "s/post_max_size\s*=\s*8M/post_max_size = 100M/g" /etc/php5/fpm/php.ini
-RUN sed -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" /etc/php5/fpm/php-fpm.conf
-
-# HAProxy
-RUN perl -p -i -e "s/ENABLED=0/ENABLED=1/g" /etc/default/haproxy
 
 CMD ["/usr/local/bin/run.sh"]
