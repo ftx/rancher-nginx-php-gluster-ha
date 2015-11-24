@@ -1,6 +1,6 @@
 [![](https://badge.imagelayers.io/flotix/rancher-nginx-php-gluster-ha:latest.svg)](https://imagelayers.io/?images=flotix/rancher-nginx-php-gluster-ha:latest 'Get your own badge on imagelayers.io')
 
-:whale: Available on DockerHub
+:whale: Available on DockerHub (https://hub.docker.com/r/flotix/rancher-nginx-php-gluster-ha/)
 
 ## Stackable Docker Container for Rancher
 ### Nginx / PHP-FPM
