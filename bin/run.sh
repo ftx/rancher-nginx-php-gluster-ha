@@ -29,27 +29,27 @@ fi
 # From Git
 
 ## ENV
-if [ "${GIT_NGINX_REPO}" -eq "**NO**" -o -z "${GIT_NGINX_REPO}" ]; then
+if [ "${GIT_NGINX_REPO}" == "**NO**" -o -z "${GIT_NGINX_REPO}" ]; then
    GIT_NGINX_REPO=`echo ${GIT_NGINX_REPO} | sed "s=https://==g"`
 fi
 
-if [ "${GIT_NGINX_LOGIN}" -eq "**NO**" -o -z "${GIT_NGINX_LOGIN}" ]; then
+if [ "${GIT_NGINX_LOGIN}" == "**NO**" -o -z "${GIT_NGINX_LOGIN}" ]; then
    GIT_NGINX_LOGIN=${GIT_NGINX_LOGIN}
 fi
 
-if [ "${GIT_NGINX_BRANCH}" -eq "**NO**" -o -z "${GIT_NGINX_BRANCH}" ]; then
+if [ "${GIT_NGINX_BRANCH}" == "**NO**" -o -z "${GIT_NGINX_BRANCH}" ]; then
    GIT_NGINX_BRANCH=${GIT_NGINX_BRANCH}
 fi
 
-if [ "${GIT_NGINX_PASS}" -eq "**NO**" -o -z "${GIT_NGINX_PASS}" ]; then
+if [ "${GIT_NGINX_PASS}" == "**NO**" -o -z "${GIT_NGINX_PASS}" ]; then
    GIT_NGINX_PASS=${GIT_NGINX_PASS}
 fi
 
 #DEPLOY
-if [ "${GIT_NGINX}" -ne "**NO**" ]; then
+if [ "${GIT_NGINX}" != "**NO**" ]; then
 
 	
-	if [ "${GIT_NGINX_LOGIN}" -ne "**NO**" ]; then
+	if [ "${GIT_NGINX_LOGIN}" != "**NO**" ]; then
 		git clone https://${GIT_NGINX_LOGIN}:${GIT_NGINX_PASS}@${GIT_NGINX_REPO}/tree/${GIT_NGINX_BRANCH} /etc/nginx
 	else
 		git clone https://${GIT_NGINX_REPO}/tree/${GIT_NGINX_BRANCH} /etc/nginx
@@ -68,10 +68,10 @@ else
 fi
 
 ### Configuration PHP-FPM 
-if [ "${PHP_MAX_UPLOAD_FILESIZE}" -eq "20M" -o -z "${PHP_MAX_UPLOAD_FILESIZE}" ]; then
+if [ "${PHP_MAX_UPLOAD_FILESIZE}" == "20M" -o -z "${PHP_MAX_UPLOAD_FILESIZE}" ]; then
    PHP_MAX_UPLOAD_FILESIZE=${PHP_MAX_UPLOAD_FILESIZE}
 fi
-if [ "${PHP_MAX_POST_SIZE}" -eq "20M" -o -z "${PHP_MAX_POST_SIZE}" ]; then
+if [ "${PHP_MAX_POST_SIZE}" == "20M" -o -z "${PHP_MAX_POST_SIZE}" ]; then
    PHP_MAX_POST_SIZE=${PHP_MAX_POST_SIZE}
 fi
 PHP_ESCAPED_SESSION_PATH=`echo ${PHP_SESSION_PATH} | sed "s/\//\\\\\\\\\//g"`
@@ -85,7 +85,7 @@ perl -p -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" /etc/php5/fpm/php-fpm.co
 
 
 ### HAProxy (if SQL)
-if [ "${DB_CLUSTER}" -eq "YES" ]; then
+if [ "${DB_CLUSTER}" == "YES" ]; then
 
 perl -p -i -e "s/ENABLED=0/ENABLED=1/g" /etc/default/haproxy
 
@@ -108,13 +108,13 @@ fi
 fi
 
 ### GlusterFS
-if [ "${GLUSTER}" -eq "YES" ]; then
+if [ "${GLUSTER}" == "YES" ]; then
 
-if [ "${GLUSTER_VOL_PATH}" -eq "/var/www" -o -z "${GLUSTER_VOL_PATH}" ]; then
+if [ "${GLUSTER_VOL_PATH}" == "/var/www" -o -z "${GLUSTER_VOL_PATH}" ]; then
    GLUSTER_VOL_PATH=${GLUSTER_VOL_PATH}
 fi
 
-if [ "${GLUSTER_PEER}" -eq "storage" -o -z "${GLUSTER_PEER}" ]; then
+if [ "${GLUSTER_PEER}" == "storage" -o -z "${GLUSTER_PEER}" ]; then
    GLUSTER_PEER=${GLUSTER_PEER}
 fi
 
@@ -153,24 +153,24 @@ if [ ! -e ${HTTP_DOCUMENTROOT}/healthcheck.txt ]; then
 fi
 
 ###Deploy Git Project
-if [ "${GIT_WEB_REPO}" -eq "**NO**" -o -z "${GIT_WEB_REPO}" ]; then
+if [ "${GIT_WEB_REPO}" == "**NO**" -o -z "${GIT_WEB_REPO}" ]; then
    GIT_WEB_REPO=`echo ${GIT_WEB_REPO} | sed "s=https://==g"`
 fi
 
-if [ "${GIT_WEB_LOGIN}" -eq "**NO**" -o -z "${GIT_WEB_LOGIN}" ]; then
+if [ "${GIT_WEB_LOGIN}" == "**NO**" -o -z "${GIT_WEB_LOGIN}" ]; then
    GIT_WEB_LOGIN=${GIT_WEB_LOGIN}
 fi
 
-if [ "${GIT_WEB_BRANCH}" -eq "**NO**" -o -z "${GIT_WEB_BRANCH}" ]; then
+if [ "${GIT_WEB_BRANCH}" == "**NO**" -o -z "${GIT_WEB_BRANCH}" ]; then
    GIT_WEB_BRANCH=${GIT_WEB_BRANCH}
 fi
 
-if [ "${GIT_WEB_PASS}" -eq "**NO**" -o -z "${GIT_WEB_PASS}" ]; then
+if [ "${GIT_WEB_PASS}" == "**NO**" -o -z "${GIT_WEB_PASS}" ]; then
    GIT_WEB_PASS=${GIT_WEB_PASS}
 fi
 
 
-if [ "${GIT_WEB_REPO}" -ne "**NO**" ]; then
+if [ "${GIT_WEB_REPO}" != "**NO**" ]; then
 
 	if [ "${GIT_WEB_LOGIN}" -ne "**NO**" ]; then
                 git clone https://${GIT_WEB_LOGIN}:${GIT_WEB_PASS}@${GIT_WEB_REPO}/tree/${GIT_WEB_BRANCH} /etc/nginx
