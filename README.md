@@ -2,7 +2,7 @@
 
 :whale: Available on DockerHub
 
-## Docker Container for Rancher
+## Stackable Docker Container for Rancher
 ### Nginx / PHP-FPM
 ##### In Option : GlusterFS Client /  HaProxy for Galera SQL CLuster
 ##### Extra : Git repo for your Nginx folder or/and Your Web Project
