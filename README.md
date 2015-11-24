@@ -8,7 +8,10 @@
 ##### Extra : Git repo for your Nginx folder or/and Your Web Project
 
 
-You need install a GlusterFS Server and had a volume name.
+:warning: OPTIONAL : Have a GlusterFS Server and had a volume name. / Have a Percona DB Cluster
+
+
+
 
 ##### Global
 |ENV Variable  |Required |Default   |Example   |
