@@ -49,6 +49,13 @@ ENV DB_CLUSTER **NO**
 ENV DB_USER **ChangeMe**
 ENV DB_PASSWORD **ChangeMe**
 
+# FTP
+ENV FTP **NO**
+ENV FTP_LOGIN flotix
+ENV FTP_PASSWD **ChangeMe**
+
+
+
 ################################
 
 
@@ -56,7 +63,7 @@ RUN apt-get update && \
     apt-get install -y python-software-properties software-properties-common
 RUN add-apt-repository -y ppa:gluster/glusterfs-3.7 && \
     apt-get update && \
-    apt-get install -y nginx php5-fpm php5-mysql php-apc supervisor glusterfs-client curl haproxy pwgen unzip mysql-client dnsutils git
+    apt-get install -y nginx php5-fpm php5-mysql php-apc supervisor glusterfs-client curl haproxy pwgen unzip mysql-client dnsutils git proftpd
 
 
 RUN mkdir -p /var/log/supervisor ${GLUSTER_VOL_PATH}
@@ -68,6 +75,6 @@ RUN chmod +x /usr/local/bin/*.sh
 ADD ./etc/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 ADD ./etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg
 ADD ./etc/nginx/sites-enabled/website /etc/nginx/sites-enabled/website
-
+ADD ./etc/proftpd.conf /etc/proftpd/proftpd.conf
 
 CMD ["/usr/local/bin/run.sh"]

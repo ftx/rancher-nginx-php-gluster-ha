@@ -181,5 +181,26 @@ if [ "${GIT_WEB_REPO}" != "**NO**" ]; then
 fi
 
 
-/usr/bin/supervisord
+### FTP
+if [ "${FTP}" == "**NO**" -o -z "${FTP}" ]; then
+   FTP=${FTP}
+fi
 
+
+if [ "${FTP}" == "YES" ]; then
+
+if [ "${FTP_LOGIN}" == "flotix" -o -z "${FTP_LOGIN}" ]; then
+   FTP_LOGIN=${FTP_LOGIN}
+fi
+
+if [ "${FTP_PASSWD}" == "**ChangeMe**" -o -z "${FTP_PASSWD}" ]; then
+   FTP_PASSWD=${FTP_PASSWD}
+fi
+
+
+# User
+useradd -d ${GLUSTER_VOL_PATH} -p ${FTP_PASSWD} ${FTP_USER}
+
+fi
+
+/usr/bin/supervisord

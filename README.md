@@ -4,7 +4,7 @@
 
 ## Stackable Docker Container for Rancher
 ### Nginx / PHP-FPM
-##### In Option : GlusterFS Client /  HaProxy for Galera SQL CLuster
+##### In Option : GlusterFS Client /  HaProxy for Galera SQL CLuster / FTP Server
 ##### Extra : Git repo for your Nginx folder or/and Your Web Project
 
 
@@ -72,6 +72,13 @@
 |GIT_WEB_LOGIN   |NO   |**NO**   |ftx   |
 |GIT_WEB_PASS   |NO   |**NO**   |lsdfgzeihti$!976756   | 
 |GIT_WEB_BRANCH   |NO   |master   |dev   |
+
+##### FTP
+|ENV Variable  |Required |Default   |Example   |
+|---|---|---|---|
+|FTP   |NO   |**NO**   |YES   |
+|FTP_LOGIN   |NO   |flotix   |ftx   |
+|FTP_PASSWD   |NO   |**CHANGEME**   |lsdfgzeihti$!976756   |
 
 
 Don't hesitate to make a pull request!! :kissing_heart:
