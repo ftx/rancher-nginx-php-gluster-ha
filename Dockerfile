@@ -72,7 +72,7 @@ WORKDIR ${GLUSTER_VOL_PATH}
 RUN mkdir -p /usr/local/bin
 ADD ./bin /usr/local/bin
 RUN chmod +x /usr/local/bin/*.sh
-ADD ./etc/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+#ADD ./etc/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 #ADD ./etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg
 ADD ./etc/nginx/sites-enabled/website /etc/nginx/sites-enabled/website
 ADD ./etc/proftpd.conf /etc/proftpd/proftpd.conf
