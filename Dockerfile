@@ -63,7 +63,7 @@ RUN apt-get update && \
     apt-get install -y python-software-properties software-properties-common
 RUN add-apt-repository -y ppa:gluster/glusterfs-3.7 && \
     apt-get update && \
-    apt-get install -y nginx php5-fpm php5-mysql php-apc supervisor glusterfs-client curl haproxy pwgen unzip mysql-client dnsutils git proftpd
+    apt-get install -y proftpd nginx php5-fpm php5-mysql php-apc supervisor glusterfs-client curl pwgen unzip mysql-client dnsutils git 
 
 
 RUN mkdir -p /var/log/supervisor ${GLUSTER_VOL_PATH}
