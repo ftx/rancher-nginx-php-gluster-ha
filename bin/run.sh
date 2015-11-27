@@ -187,7 +187,7 @@ if [ "${FTP}" == "**NO**" -o -z "${FTP}" ]; then
 fi
 
 
-#if [ "${FTP}" == "YES" ]; then
+if [ "${FTP}" == "YES" ]; then
 
 if [ "${FTP_LOGIN}" == "flotix" -o -z "${FTP_LOGIN}" ]; then
    FTP_LOGIN=${FTP_LOGIN}
@@ -199,8 +199,13 @@ fi
 
 
 # User
+
+if [ "${GLUSTER_VOL_PATH}" == "/var/www" -o -z "${GLUSTER_VOL_PATH}" ]; then
+   GLUSTER_VOL_PATH=${GLUSTER_VOL_PATH}
+fi
+
 useradd -d ${GLUSTER_VOL_PATH} -p ${FTP_PASSWD} ${FTP_USER}
 
-#fi
+fi
 
 #/usr/bin/supervisord

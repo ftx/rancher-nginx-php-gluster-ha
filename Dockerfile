@@ -7,7 +7,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 ######## ENV VARIABLES ########
 
 # DEBUG
-ENV DEBUG 0
+ENV DEBUG 1
 
 # GLOBAL
 ENV SITE_NAME **ChangeMe**
