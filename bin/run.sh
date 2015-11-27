@@ -208,4 +208,5 @@ useradd -d ${GLUSTER_VOL_PATH} -p ${FTP_PASSWD} ${FTP_LOGIN}
 
 fi
 
+service proftpd restart
 /usr/bin/supervisord
