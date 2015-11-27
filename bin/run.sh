@@ -208,4 +208,4 @@ useradd -d ${GLUSTER_VOL_PATH} -p ${FTP_PASSWD} ${FTP_LOGIN}
 
 fi
 
-#/usr/bin/supervisord
+/usr/bin/supervisord
