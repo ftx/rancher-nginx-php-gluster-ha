@@ -204,7 +204,7 @@ if [ "${GLUSTER_VOL_PATH}" == "/var/www" -o -z "${GLUSTER_VOL_PATH}" ]; then
    GLUSTER_VOL_PATH=${GLUSTER_VOL_PATH}
 fi
 
-useradd -d ${GLUSTER_VOL_PATH} -p ${FTP_PASSWD} ${FTP_USER}
+useradd -d ${GLUSTER_VOL_PATH} -p ${FTP_PASSWD} ${FTP_LOGIN}
 
 fi
 
