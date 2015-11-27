@@ -46,7 +46,7 @@ if [ "${GIT_NGINX_PASS}" == "**NO**" -o -z "${GIT_NGINX_PASS}" ]; then
 fi
 
 #DEPLOY
-if [ "${GIT_NGINX}" != "**NO**" ]; then
+if [ "${GIT_NGINX}" == "YES" ]; then
 
 	
 	if [ "${GIT_NGINX_LOGIN}" != "**NO**" ]; then
@@ -170,7 +170,7 @@ if [ "${GIT_WEB_PASS}" == "**NO**" -o -z "${GIT_WEB_PASS}" ]; then
 fi
 
 
-if [ "${GIT_WEB_REPO}" != "**NO**" ]; then
+if [ "${GIT_WEB_REPO}" == "YES" ]; then
 
 	if [ "${GIT_WEB_LOGIN}" -ne "**NO**" ]; then
                 git clone https://${GIT_WEB_LOGIN}:${GIT_WEB_PASS}@${GIT_WEB_REPO}/tree/${GIT_WEB_BRANCH} /etc/nginx
