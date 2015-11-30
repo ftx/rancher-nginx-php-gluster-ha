@@ -14,6 +14,12 @@ ENV DEBUG 1
 ENV SITE_NAME **ChangeMe**
 ENV DOMAIN **ChangeMe**
 
+# Config NFS
+ENV NFS	**NO**
+ENV NFS_SERVER **ChangeMe**
+ENV NFS_REMOTE **ChangeMe**
+ENV NFS_MOUNT **ChangeMe**
+
 # Config GlusterFSClient
 ENV GLUSTER **NO**
 ENV GLUSTER_VOL ranchervol
@@ -64,7 +70,7 @@ RUN apt-get update && \
     apt-get install -y python-software-properties software-properties-common
 RUN add-apt-repository -y ppa:gluster/glusterfs-3.7 && \
     apt-get update && \
-    apt-get install -y proftpd-basic supervisor haproxy nginx php5-fpm php5-mysql php-apc supervisor glusterfs-client curl pwgen unzip mysql-client dnsutils git 
+    apt-get install -y proftpd-basic supervisor haproxy nginx php5-fpm php5-mysql php-apc supervisor glusterfs-client curl pwgen unzip mysql-client dnsutils git nfs-common libfile-nfslock-perl rpcbind 
 
 
 RUN mkdir -p /var/log/supervisor ${GLUSTER_VOL_PATH}

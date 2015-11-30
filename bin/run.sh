@@ -107,6 +107,37 @@ fi
 
 fi
 
+
+if [ "${NFS}" == "**NO**" -o -z "${NFS}" ]; then
+   NFS=${NFS}
+fi
+
+
+if [ "${NFS}" == "YES" ]; then
+
+
+
+if [ "${NFS_SERVER}" == "**ChangeMe**" -o -z "${NFS_SERVER}" ]; then
+   NFS_SERVER=${NFS_SERVER}
+fi
+
+if [ "${NFS_REMOTE}" == "**ChangeMe**" -o -z "${NFS_REMOTE}" ]; then
+   NFS_REMOTE=${NFS_REMOTE}
+fi
+
+if [ "${NFS_MOUNT}" == "**ChangeMe**" -o -z "${NFS_MOUNT}" ]; then
+   NFS_MOUNT=${NFS_MOUNT}
+fi
+
+mkdir -p ${NFS_MOUNT}
+/etc/init.d/rpcbind start
+
+
+mount ${NFS_SERVER}:${NFS_REMOTE} ${NFS_MOUNT}
+
+fi
+
+
 ### GlusterFS
 if [ "${GLUSTER}" == "YES" ]; then
 
